@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="" ng-app="medicallife" ng-controller="Admin">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+
+    <title>Medical File</title>
+
+    <script src="../../vendor/jquery/jquery.slim.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="../../controllers/admin.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body ng-init="getprofile()">
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Medical File</a>
+        <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-target="#navbarResponsive" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto" ng-if="userrole.name == 'Admin'"
+                ng-include="'/fragments/menus/admin_menu.html'">
+            </ul>
+            <ul class="navbar-nav ml-auto" ng-if="userrole.name == 'Doctor'"
+                ng-include="'/fragments/menus/doctor_menu.html'">
+            </ul>
+            <ul class="navbar-nav ml-auto" ng-if="userrole.name == 'Patient'"
+                ng-include="'/fragments/menus/patient_menu.html'">
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    {{message}}
+</div>
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="firstNameInput">First Name</label>
+            <input aria-describedby="firstName" class="form-control" id="firstNameInput" ng-model="first_name"
+                   placeholder="{{profileData.first_name}}" type="text"
+                   value="{{profileData.first_name}}">
+        </div>
+        <div class="form-group">
+            <label for="lastNameInput">Last name</label>
+            <input aria-describedby="lastName" class="form-control" id="lastNameInput" ng-model="last_name"
+                   placeholder="{{profileData.last_name}}" type="text"
+                   value="{{profileData.last_name}}">
+
+        </div>
+        <div class="form-group">
+            <label for="specialty">Specialty</label>
+            <input aria-describedby="specialty" class="form-control" id="specialty" ng-model="specialty"
+                   placeholder="{{profileData.specialty}}"
+                   type="text" value="{{profileData.specialty}}">
+        </div>
+        <div class="form-group">
+            <label for="patientsCount">Patients Count</label>
+            <input aria-describedby="patientsCount" class="form-control" id="patientsCount" readonly
+                   type="text" value="{{profileData.patients.length}}">
+        </div>
+        <div class="form-group">
+            <label for="visitsCount">Visits Count</label>
+            <input aria-describedby="visitsCount" class="form-control" id="visitsCount" readonly
+                   type="text" value="{{profileData.visits.length}}">
+        </div>
+
+        <button class="btn btn-primary" ng-click="editDoctorProfile(first_name, last_name, specialty)" type="submit">
+            Edit Doctor
+        </button>
+    </form>
+</div>
+</body>
+</html>

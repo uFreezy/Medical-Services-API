@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="" ng-app="medicallife" ng-controller="Doctor">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+
+    <title>Medical File</title>
+
+    <script src="../../vendor/jquery/jquery.slim.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="../../controllers/doctor.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Medical File</a>
+        <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-target="#navbarResponsive" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto" ng-if="userrole.name == 'Admin'"
+                ng-include="'/menus/admin_visit_table.html'">
+            </ul>
+            <ul class="navbar-nav ml-auto" ng-if="userrole.name == 'Doctor'"
+                ng-include="'/fragments/menus/doctor_menu.html'">
+            </ul>
+            <ul class="navbar-nav ml-auto" ng-if="userrole.name == 'Patient'"
+                ng-include="'/fragments/menus/patient_menu.html'">
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" ng-init="getInfoForDiagnoses()">
+    <p ng-show="diagnosesSummaries.length == 0">
+        No information available! I guess no one gets sick anymore :)
+    </p>
+    <div class="container" ng-repeat="s in diagnosesSummaries" ng-show="s.sickness_entries.length > 0">
+        <h2>{{s.diagnosis_name}}</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Treating Doctor Name</th>
+                <th scope="col">Patient Name</th>
+                <th scope="col">Sick Leave Days</th>
+                <th scope="col">Treatment</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="se in s.sickness_entries">
+                <th scope="row">{{$index}}</th>
+                <td>{{ se.doc_name}}</td>
+                <td>{{ se.patient_name }}</td>
+                <td>{{ se.sick_leave_days }}</td>
+                <td>{{ se.treatment }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="" ng-app="medicallife" ng-controller="Patient">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+
+    <title>Medical File</title>
+
+    <script src="../../vendor/jquery/jquery.slim.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="../../controllers/patient.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Medical File</a>
+        <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-target="#navbarResponsive" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../index.html">Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fragments/patient/patient_visit_table.html">Past Visits</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fragments/forms/patient_profile_form.html">Profile</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" ng-init="visits()">
+    <p ng-show="personalVisits.length == 0">
+        You haven't visited a doctor yet! Hooray! :)
+    </p>
+    <table class="table" ng-show="personalVisits.length > 0">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Doctor</th>
+            <th scope="col">Sick Leave Days</th>
+            <th scope="col">Diagnosis</th>
+            <th scope="col">Treatment</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="d in personalVisits">
+            <th scope="row">{{$index}}</th>
+            <td>{{ d.date }}</td>
+            <td>{{ d.doctor.name }}</td>
+            <td>{{ d.sick_leave.days }}</td>
+            <td>{{ d.diagnosis }}</td>
+            <td>{{ d.treatment }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

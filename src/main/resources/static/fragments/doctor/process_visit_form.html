@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="medicallife" ng-controller="Doctor">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+
+    <title>Medical File</title>
+
+    <script src="../../vendor/jquery/jquery.slim.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="../../controllers/doctor.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Medical File</a>
+        <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-target="#navbarResponsive" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto" ng-if="userrole.name == 'Admin'"
+                ng-include="'../menus/admin_visit_table.html'">
+            </ul>
+            <ul class="navbar-nav ml-auto" ng-if="userrole.name == 'Doctor'"
+                ng-include="'../menus/admin_visit_table.html'">
+            </ul>
+            <ul class="navbar-nav ml-auto" ng-if="userrole.name == 'Patient'" ng-include="'../menus/patient_menu.html'">
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="diagnosisInput">Diagnosis</label>
+            <input aria-describedby="diagnosisInput" class="form-control" id="diagnosisInput" ng-model="diagnosis"
+                   type="text">
+        </div>
+        <div class="form-group">
+            <label for="SickLeaveFrom">Sick Leave From</label>
+            <input aria-describedby="SickLeaveFrom" class="form-control" id="SickLeaveFrom" ng-model="sick_leave_from"
+                   type="datetime-local">
+
+        </div>
+        <div class="form-group">
+            <label for="sickLeaveTo">Sick Leave To</label>
+            <input aria-describedby="sickLeaveTo" class="form-control" id="sickLeaveTo" ng-model="sick_leave_to"
+                   type="datetime-local">
+        </div>
+
+        <div class="form-group">
+            <label for="treatment">Treatment</label>
+            <input aria-describedby="treatment" class="form-control" id="treatment" ng-model="treatment" type="text">
+        </div>
+
+        <button class="btn btn-primary"
+                ng-click="processVisit(processVisitId, diagnosis, sick_leave_from, sick_leave_to, treatment)"
+                type="submit">Submit
+        </button>
+    </form>
+</div>
+</body>
+</html>

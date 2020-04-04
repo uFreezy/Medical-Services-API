@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="" ng-app="medicallife" ng-controller="Admin">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+
+    <title>Medical File</title>
+
+    <script src="../../vendor/jquery/jquery.slim.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="../../controllers/admin.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Medical File</a>
+        <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-target="#navbarResponsive" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto" ng-if="userrole.name == 'Admin'"
+                ng-include="'/fragments/menus/admin_menu.html'">
+            </ul>
+            <ul class="navbar-nav ml-auto" ng-if="userrole.name == 'Doctor'"
+                ng-include="'/fragments/menus/doctor_menu.html'">
+            </ul>
+            <ul class="navbar-nav ml-auto" ng-if="userrole.name == 'Patient'"
+                ng-include="'/fragments/menus/patient_menu.html'">
+            </ul>
+        </div>
+    </div>
+</nav>
+<divc class="container">
+    {{resultMessage}}
+</divc>
+
+<div class="container" ng-init="patientList()">
+    <p ng-show="patientList.length == 0">
+        No information available! I guess no one gets sick anymore :)
+    </p>
+    <div class="container" ng-show="patientList.length > 0">
+        <h2>Patients</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">EGN</th>
+                <th scope="col">Username</th>
+                <th scope="col">Paid Insurance</th>
+                <th scope="col">Doctor Visits Count</th>
+                <th scope="col">Action #1</th>
+                <th scope="col">Action #2</th>
+                <th scope="col">Action #3</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="p in patientList">
+                <th scope="row">{{$index+1}}</th>
+                <td><a href="#">{{p.first_name}} {{p.last_name}}</a></td>
+                <td>{{ p.egn }}</td>
+                <td>{{ p.username }}</td>
+                <td>{{ p.paid_insurance }}</td>
+                <td>{{ p.visits_count }}</td>
+                <td>
+                    <button ng-click="loadProfilePage(p.id,0)">Edit Patient</button>
+                </td>
+                <td>
+                    <button ng-click="switchRole(p.id,2)">Switch Role</button>
+                </td>
+                <td>
+                    <button ng-click="deleteUser(p.id)">Delete User</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container" ng-init="doctorList()">
+    <p ng-show="doctorList.length == 0">
+        No information available! I guess no one gets sick anymore :)
+    </p>
+    <div class="container" ng-show="doctorList.length > 0">
+        <h2>Doctors</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Username</th>
+                <th scope="col">Patients Count</th>
+                <th scope="col">Total Visits Count</th>
+                <th scope="col">Action #1</th>
+                <th scope="col">Action #2</th>
+                <th scope="col">Action #3</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="d in doctorList">
+                <th scope="row">{{$index+1}}</th>
+                <td><a href="#">{{d.first_name}} {{d.last_name}}</a></td>
+                <td>{{ d.username }}</td>
+                <td>{{ d.patients_count }}</td>
+                <td>{{ d.visits_count }}</td>
+                <td>
+                    <button ng-click="loadProfilePage(d.id,1)">Edit Doctor</button>
+                </td>
+                <td>
+                    <button ng-click="switchRole(d.id,1)">Switch Role</button>
+                </td>
+                <td>
+                    <button ng-click="deleteUser(d.id)">Delete User</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
