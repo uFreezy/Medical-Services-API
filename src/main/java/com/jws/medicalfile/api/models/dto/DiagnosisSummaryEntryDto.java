@@ -14,6 +14,29 @@ public class DiagnosisSummaryEntryDto {
         this.treatment = treatment;
     }
 
+    public String getDocName() {
+        return docName;
+    }
+
+    public void setDocName(String docName) {
+        this.docName = docName;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public int getSickLeaveDays() {
+        return sickLeaveDays;
+    }
+
+    public void setSickLeaveDays(int sickLeaveDays) {
+        this.sickLeaveDays = sickLeaveDays;
+    }
 
     public String getTreatment() {
         return treatment;

@@ -33,7 +33,6 @@ public class BaseController {
         return this.userService.findByUsername(this.securityService.findLoggedInUsername());
     }
 
-
     public Doctor getLoggedDoctor() {
         return this.doctorService.findByUserId(this.getLoggedUser().getId());
     }
