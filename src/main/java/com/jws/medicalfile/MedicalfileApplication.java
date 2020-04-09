@@ -1,7 +1,7 @@
 package com.jws.medicalfile;
 
-import com.jws.medicalfile.db.Seeder;
-import com.jws.medicalfile.db.service.*;
+import com.jws.medicalfile.api.Seeder;
+import com.jws.medicalfile.api.service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
