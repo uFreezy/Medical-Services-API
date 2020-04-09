@@ -25,36 +25,20 @@ public class BaseController {
     @Autowired
     SickLeaveService sickLeaveService;
 
-    private User loggedUser;
+    /*private User loggedUser;
     private Doctor loggedDoctor;
-    private Patient loggedPatient;
+    private Patient loggedPatient;*/
 
     public User getLoggedUser() {
-        if (this.loggedUser == null) this.setLoggedUser();
-        return loggedUser;
+        return this.userService.findByUsername(this.securityService.findLoggedInUsername());
     }
 
-    private void setLoggedUser() {
-        this.loggedUser = this.userService.findByUsername(this.securityService.findLoggedInUsername());
-    }
 
     public Doctor getLoggedDoctor() {
-        if (this.loggedDoctor == null) this.setLoggedDoctor();
-        return loggedDoctor;
-    }
-
-    private void setLoggedDoctor() {
-        this.loggedDoctor = this.doctorService.findByUserId(this.getLoggedUser().getId());
-        if (this.loggedDoctor == null) throw new IllegalStateException("Logged user is not a doctor.");
+        return this.doctorService.findByUserId(this.getLoggedUser().getId());
     }
 
     public Patient getLoggedPatient() {
-        if (this.loggedPatient == null) this.setLoggedPatient();
-        return loggedPatient;
-    }
-
-    private void setLoggedPatient() {
-        this.loggedPatient = this.patientService.findByUserId(this.getLoggedUser().getId());
-        if (this.loggedPatient == null) throw new IllegalStateException("Logged user is not a patient");
+        return this.patientService.findByUserId(this.getLoggedUser().getId());
     }
 }
